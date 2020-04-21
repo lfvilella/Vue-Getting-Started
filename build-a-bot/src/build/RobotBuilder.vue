@@ -1,35 +1,57 @@
 <template>
-  <div>
+  <div class="content">
+    <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div class="top-row">
       <div class="top part">
-        <img :src="avaliableParts.heads[selectedHeadIndex].src" title="head" />
+        <div class="robot-name">
+          {{ selectedRobot.head.title }}
+          <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
+        </div>
+        <img :src="selectedRobot.head.src" title="head" />
         <button @click="selectPreviousHead()" class="prev-selector">&#9668;</button>
         <button @click="selectNextHead()" class="next-selector">&#9658;</button>
       </div>
     </div>
     <div class="middle-row">
       <div class="left part">
-        <img :src="avaliableParts.arms[selectedLeftArmIndex].src" title="left arm" />
+        <img :src="selectedRobot.leftArm.src" title="left arm" />
         <button @click="selectPreviousLeftArm()" class="prev-selector">&#9650;</button>
         <button @click="selectNextLeftArm()" class="next-selector">&#9660;</button>
       </div>
       <div class="center part">
-        <img :src="avaliableParts.torsos[selectedTorsoIndex].src" title="left arm" />
+        <img :src="selectedRobot.torso.src" title="left arm" />
         <button @click="selectPreviousTorso()" class="prev-selector">&#9668;</button>
         <button @click="selectNextTorso()" class="next-selector">&#9658;</button>
       </div>
       <div class="right part">
-        <img :src="avaliableParts.arms[selectedRightArmIndex].src" title="left arm" />
+        <img :src="selectedRobot.rightArm.src" title="left arm" />
         <button @click="selectNextRightArm()" class="prev-selector">&#9650;</button>
         <button @click="selectPreviousRightArm()" class="next-selector">&#9660;</button>
       </div>
     </div>
     <div class="bottom-row">
       <div class="bottom part">
-        <img :src="avaliableParts.bases[selectedBaseIndex].src" title="left arm" />
+        <img :src="selectedRobot.base.src" title="left arm" />
         <button @click="selectPreviousBase()" class="prev-selector">&#9668;</button>
         <button @click="selectNextBase()" class="next-selector">&#9658;</button>
       </div>
+    </div>
+    <div>
+      <h1>Cart</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Robot</th>
+            <th class="cost">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(robot, index) in cart" :key="index">
+            <td>{{ robot.head.title }}</td>
+            <td class="cost">{{ robot.cost }}</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -52,6 +74,7 @@ export default {
   data() {
     return {
       avaliableParts,
+      cart: [],
       selectedHeadIndex: 0,
       selectedLeftArmIndex: 0,
       selectedRightArmIndex: 0,
@@ -59,7 +82,28 @@ export default {
       selectedBaseIndex: 0,
     };
   },
+  computed: {
+    selectedRobot() {
+      return {
+        head: avaliableParts.heads[this.selectedHeadIndex],
+        leftArm: avaliableParts.arms[this.selectedLeftArmIndex],
+        rightArm: avaliableParts.arms[this.selectedRightArmIndex],
+        torso: avaliableParts.torsos[this.selectedTorsoIndex],
+        base: avaliableParts.bases[this.selectedBaseIndex],
+      };
+    },
+  },
   methods: {
+    addToCart() {
+      const robot = this.selectedRobot;
+      const cost = robot.head.cost
+        + robot.leftArm.cost
+        + robot.rightArm.cost
+        + robot.torso.cost
+        + robot.base.cost;
+      this.cart.push(Object.assign({}, robot, { cost }));
+    },
+
     // Head
     selectNextHead() {
       this.selectedHeadIndex = getNextValidIndex(this.selectedHeadIndex,
@@ -202,5 +246,32 @@ export default {
 }
 .right .next-selector {
   right: -3px;
+}
+.robot-name {
+  position: absolute;
+  top: -25px;
+  text-align: center;
+  width: 100%;
+}
+.sale {
+  color: red;
+}
+.content {
+  position: relative;
+}
+.add-to-cart {
+  position: absolute;
+  right: 30px;
+  widows: 220px;
+  padding: 3px;
+  font-size: 16px;
+}
+td, th {
+  text-align: left;
+  padding: 5px;
+  padding-right: 20px;
+}
+.cost {
+  text-align: right;
 }
 </style>
