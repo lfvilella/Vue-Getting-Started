@@ -2,7 +2,7 @@
   <div class="content">
     <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     <div class="top-row">
-      <div class="top part" :class="{'border-style': selectedRobot.head.onSale}">
+      <div :class="[saleBorderClass, 'top', 'part']">
         <div class="robot-name">
           {{ selectedRobot.head.title }}
           <span v-if="selectedRobot.head.onSale" class="sale">Sale!</span>
@@ -83,6 +83,10 @@ export default {
     };
   },
   computed: {
+    saleBorderClass() {
+      return this.selectedRobot.head.onSale ? 'border-style' : '';
+    },
+
     headBorderStyle() {
       return {
         border: this.selectedRobot.head.onSale
