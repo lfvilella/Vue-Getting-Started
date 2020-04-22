@@ -14,6 +14,11 @@
               Build
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link class="nav-link" :to="{name: 'BrowseParts'}" exact>
+              Build Browse
+            </router-link>
+          </li>
         </ul>
       </nav>
     </header>
