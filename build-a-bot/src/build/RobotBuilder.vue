@@ -2,6 +2,7 @@
   <div class="content">
 
     <div class="preview">
+      <CollapsibleSection>
       <div class="preview-content">
         <div class="top-row">
           <img :src="selectedRobot.head.src"/>
@@ -15,6 +16,7 @@
           <img :src="selectedRobot.base.src"/>
         </div>
       </div>
+      </CollapsibleSection>
       <button @click="addToCart()" class="add-to-cart">Add to Cart</button>
     </div>
 
@@ -71,10 +73,11 @@
 <script>
 import avaliableParts from '../data/parts';
 import PartSelector from './PartSelector.vue';
+import CollapsibleSection from '../shared/CollapsibleSection.vue';
 
 export default {
   name: 'RobotBuilder',
-  components: { PartSelector },
+  components: { PartSelector, CollapsibleSection },
   data() {
     return {
       avaliableParts,
