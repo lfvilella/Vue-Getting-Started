@@ -6,3 +6,6 @@ public
 babel.config.js
 package-lock.json
 package.json
+
+# You can get this here: https://github.com/jmcooper/build-a-bot-server
+build-a-bot-server
