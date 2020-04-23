@@ -114,7 +114,8 @@ export default {
         + robot.torso.cost
         + robot.base.cost;
 
-      this.$store.commit('addRobotToCart', { ...robot, cost });
+      this.$store.dispatch('addRobotToCart', { ...robot, cost })
+        .then(() => this.$router.push('/cart'));
       this.addedToCart = true;
     },
   },
