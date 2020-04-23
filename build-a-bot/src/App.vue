@@ -19,6 +19,14 @@
               Build Browse
             </router-link>
           </li>
+          <li class="nav-item cart">
+            <router-link class="nav-link" to="/cart" exact>
+              Cart
+            </router-link>
+            <div class="cart-items">
+              {{ cart.length }}
+            </div>
+          </li>
         </ul>
       </nav>
     </header>
@@ -37,6 +45,11 @@
 
 export default {
   name: 'App',
+  computed: {
+    cart() {
+      return this.$store.state.cart;
+    },
+  },
 };
 </script>
 
@@ -72,6 +85,22 @@ ul {
   padding: 5px 10px;
   font-size: 22px;
   border-right: 1px solid #bbb;
+}
+.cart {
+  position: relative;
+  margin-left: auto;
+  border-right: none;
+}
+.cart-items {
+  position: absolute;
+  top: -10px;
+  right: -9px;
+  font-size: 18px;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 100px;
+  background-color: mediumseagreen;
 }
 .logo {
   vertical-align: middle;
