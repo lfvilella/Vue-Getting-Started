@@ -1,11 +1,18 @@
+function applyStyle(elementSelf, binding) {
+  const element = elementSelf;
+
+  Object.keys(binding.value).forEach((position) => {
+    element.style[position] = binding.value[position];
+  });
+
+  element.style.position = 'absolute';
+}
+
 export default {
-  bind: (el, binding) => {
-    const element = el;
-
-    Object.keys(binding.value).forEach((position) => {
-      element.style[position] = binding.value[position];
-    });
-
-    element.style.position = 'absolute';
+  bind: (elementSelf, binding) => {
+    applyStyle(elementSelf, binding);
+  },
+  update: (elementSelf, binding) => {
+    applyStyle(elementSelf, binding);
   },
 };
