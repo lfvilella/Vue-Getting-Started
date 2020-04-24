@@ -11,5 +11,8 @@ package.json
 build-a-bot-server
 
 # Django/Python
+__pycache__/
+*.py[cod]
+*$py.class
 django-vuejs/venv
 django-vuejs/proj/db.sqlite3
