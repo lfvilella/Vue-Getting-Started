@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #000000;
+            color: white;
+        }
+        html,
+        .fullscreen {
+            display: flex;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        .container {
+            margin: auto;
+            text-align: center;
+        }
+        p {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body class="fullscreen">
+
+    <div id="app" class="container">
+        <h1>Click on id</h1>
+        <p v-for="book in books" @click="selectBook(book)">
+            [[ book.id ]]
+        </p>
+
+        <span v-if="selectedBook.id">
+            Selected Book: [[ selectedBook.id ]] - Name: [[ selectedBook.name ]]
+        </span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="{% static 'home-vue.js' %}"></script>
+</body>
+
+</html>

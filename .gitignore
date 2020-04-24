@@ -9,3 +9,7 @@ package.json
 
 # You can get this here: https://github.com/jmcooper/build-a-bot-server
 build-a-bot-server
+
+# Django/Python
+django-vuejs/venv
+django-vuejs/proj/db.sqlite3
