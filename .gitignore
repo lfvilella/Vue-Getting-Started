@@ -11,7 +11,7 @@ package.json
 build-a-bot-server
 
 # Django/Python
-__pycache__/
+django-vuejs/proj/**/__pycache__
 *.py[cod]
 *$py.class
 django-vuejs/venv
